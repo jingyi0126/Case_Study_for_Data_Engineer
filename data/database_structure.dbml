@@ -1,0 +1,47 @@
+Table comp_cont [note: "This relation connects the contacts with the companies."] {
+  k_company int [not null, ref: > companies.k_company, note: "Foreign key to the company"]
+  k_contact varchar [not null, ref: > contacts.k_contact, note: "Foreign key to the contact"]
+  main_company bit [note: "Whether it is the contact's main comapny"]
+
+  indexes {
+    (k_company, k_contact) [pk]
+  }
+
+}
+
+Table companies [note: "This table contains all companies."] {
+  k_company int [pk, not null, note: "Primary key of the company"]
+  name varchar [note: "Name of the company"]
+  country varchar [note: "Location of the company"]
+  opening_date date [note: "Date of company opening"]
+}
+
+Table contacts [note: "This table contains all contacts."] {
+  k_contact varchar [pk, not null, note: "Primary key of the contact"]
+  creation_date date [note: "Date of contact creation"]
+  country varchar [note: "Country of living"]
+}
+
+Table articles [note: "This table contains watches."]{
+  k_article varchar [pk, not null, note: "Primary key of the article"]
+  family varchar [note: "The article's family"]
+}
+
+Table visits [note: "This table contains the contacts visits."]{
+  k_visit int [pk, not null, note: "Primary key of the visit"]
+  f_company int [ref: > companies.k_company, note: "Foreign key to the company"]
+  f_contact varchar [ref: > contacts.k_contact, note: "Foreign key to the contact"]
+  visit_date date [note: "Date of visit"]
+  duration int [note: "Duration in minutes"]
+}
+
+Table visit_results [note: "This table contains the visit results."]{
+  k_visit_result int [pk, not null, note: "Primary key of the visit result"]
+  f_visit int [not null, ref: > visits.k_visit, note: "Foreign key to the visit"]
+  shortlisted_reference1 varchar [ref: > articles.k_article, note: "Foreign key to the article"]
+  shortlisted_reference2 varchar [ref: > articles.k_article, note: "Foreign key to the article"]
+  shortlisted_reference3 varchar [ref: > articles.k_article, note: "Foreign key to the article"]
+}
+
+
+Ref: "visits"."k_visit" < "visits"."f_company"
