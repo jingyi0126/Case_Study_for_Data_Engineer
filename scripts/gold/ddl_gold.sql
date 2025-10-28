@@ -99,7 +99,7 @@ CREATE VIEW gold.fact_visits AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY v.k_visit) AS visit_key,    -- surrogate key
     v.k_visit                              AS visit_id,
-    dc.company_id                          AS company_id,
+    COALESCE(dc.company_id, -1)            AS company_id,
     dct.contact_id                         AS contact_id,
     dd.date                                AS date,
     v.duration                             AS visit_duration,
