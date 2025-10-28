@@ -22,7 +22,7 @@ Usage Notes:
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_company, COUNT(*) 
-FROM bronze.companies
+FROM silver.companies
 GROUP BY k_company
 HAVING COUNT(*)>1
 
@@ -30,7 +30,7 @@ HAVING COUNT(*)>1
 -- Expectation: No Results
 SELECT 
     name,country 
-FROM bronze.companies
+FROM silver.companies
 WHERE name != TRIM(name) AND country != TRIM(country);
 
 
@@ -40,7 +40,7 @@ WHERE name != TRIM(name) AND country != TRIM(country);
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_contact, COUNT(*) 
-FROM bronze.contacts
+FROM silver.contacts
 GROUP BY k_contact
 HAVING COUNT(*)>1
 
@@ -48,13 +48,13 @@ HAVING COUNT(*)>1
 -- Expectation: No Results
 SELECT 
     country 
-FROM bronze.contacts
+FROM silver.contacts
 WHERE country != TRIM(country);
 
 -- Check for Invalid date ranges
 -- Expectation: No Results
 SELECT creation_date 
-FROM bronze.contacts
+FROM silver.contacts
 WHERE creation_date > '2023-12-31' 
     OR creation_date < '2023-01-01';
 -- ====================================================================
@@ -63,26 +63,26 @@ WHERE creation_date > '2023-12-31'
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_company, k_contact, COUNT(*) AS duplicate_count
-FROM bronze.comp_cont
+FROM silver.comp_cont
 GROUP BY k_company, k_contact
 HAVING COUNT(*) > 1;
 
 -- Check for Data standardization and consistency
 -- Expectation: No Results
 SELECT DISTINCT main_company
-FROM bronze.comp_cont;
+FROM silver.comp_cont;
 
 -- Check for Data consistency between related fields
 -- Expectation: No Results
 SELECT cc.*, c.k_company
-FROM bronze.comp_cont cc
-LEFT JOIN bronze.companies c
+FROM silver.comp_cont cc
+LEFT JOIN silver.companies c
     ON cc.k_company = c.k_company
 WHERE c.k_company IS NULL;
 
 SELECT cc.*
-FROM bronze.comp_cont cc
-LEFT JOIN bronze.contacts ct
+FROM silver.comp_cont cc
+LEFT JOIN silver.contacts ct
     ON cc.k_contact = ct.k_contact
 WHERE ct.k_contact IS NULL;
 
@@ -92,7 +92,7 @@ WHERE ct.k_contact IS NULL;
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_visit_result, COUNT(*) 
-FROM bronze.visit_results
+FROM silver.visit_results
 GROUP BY k_visit_result
 HAVING COUNT(*)>1;
 
@@ -102,7 +102,7 @@ HAVING COUNT(*)>1;
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_article, COUNT(*) 
-FROM bronze.articles
+FROM silver.articles
 GROUP BY k_article
 HAVING COUNT(*)>1;
 
@@ -113,7 +113,7 @@ HAVING COUNT(*)>1;
 -- Check for NULLs or Duplicates in Primary Key
 -- Expectation: No Results
 SELECT k_visit, COUNT(*) 
-FROM bronze.visits
+FROM silver.visits
 GROUP BY k_visit
 HAVING COUNT(*)>1;
 
@@ -130,7 +130,7 @@ SELECT * FROM
             ELSE 0 
         END as is_valid,
 		duration
-FROM bronze.visits) AS t
+FROM silver.visits) AS t
 WHERE is_valid = 1
   AND visit_date > GETDATE();
 
