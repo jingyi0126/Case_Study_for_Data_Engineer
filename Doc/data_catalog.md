@@ -10,8 +10,8 @@ The Gold Layer is the business-level data representation, structured to support 
 
 | Column Name      | Data Type     | Description                                                                                   |
 |------------------|---------------|-----------------------------------------------------------------------------------------------|
-| customer_key     | INT           | Surrogate key uniquely identifying each company record in the dimension table.               |
-| customer_id      | INT           | Unique numerical identifier assigned to each company.                                        |
+| company_key     | INT           | Surrogate key uniquely identifying each company record in the dimension table.               |
+| company_id      | INT           | Unique numerical identifier assigned to each company.                                        |
 | name             | VARCHAR(255)  | The company's name.                                                     |
 | country          | VARCHAR(255)  | The country of residence for the company (e.g., 'Australia').                               |
 
@@ -23,8 +23,8 @@ The Gold Layer is the business-level data representation, structured to support 
 
 | Column Name      | Data Type     | Description                                                                                   |
 |------------------|---------------|-----------------------------------------------------------------------------------------------|
-| customer_key     | INT           | Surrogate key uniquely identifying each contact record in the dimension table.               |
-| customer_id      | VARCHAR(255)  | Unique numerical identifier assigned to each contact.                                        |
+| contact_key     | INT           | Surrogate key uniquely identifying each contact record in the dimension table.               |
+| contact_id      | VARCHAR(255)  | Unique numerical identifier assigned to each contact.                                        |
 | country          | VARCHAR(255)  | The country of residence for the contact (e.g., 'Australia').                                |
 | create_date      | DATE          | The date when the contact record was created in the system                          |
 | main_company     | INT           | The contact person's main contact company.                               |
@@ -39,7 +39,7 @@ The Gold Layer is the business-level data representation, structured to support 
 | Column Name      | Data Type     | Description                                                                                   |
 |------------------|---------------|-----------------------------------------------------------------------------------------------|
 | article_key      | INT           | Surrogate key uniquely identifying each article record in the dimension table.               |
-| customer_id      | VARCHAR(255)  | Unique numerical identifier assigned to each article.                                        |
+| article_id      | VARCHAR(255)  | Unique numerical identifier assigned to each article.                                        |
 | familiy          | VARCHAR(255)  | The article's family.                                                                        |
 
 ---
