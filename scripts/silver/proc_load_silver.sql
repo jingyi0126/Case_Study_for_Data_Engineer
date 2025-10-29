@@ -101,11 +101,12 @@ BEGIN
 			f_company,
 			f_contact,
 			visit_date,
+		    duration,
 			CASE 
                 WHEN visit_date <= GETDATE() THEN 1 
                 ELSE 0 
-            END as is_valid,
-			duration
+            END as is_valid
+			
 		FROM bronze.visits
 		SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(SECOND, @start_time, @end_time) AS NVARCHAR) + ' seconds';
