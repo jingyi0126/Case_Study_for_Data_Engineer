@@ -30,11 +30,12 @@ A conceptual star schema of the final **gold layer** can be found in:
 │   ├── silver/
 │   │   ├── ddl_silver.sql       # DDL statements for silver tables
 │   │   ├── proc_load_silver.sql # Cleansing + conforming transformation logic
-│   │   ├── init_db.sql          # Utility / initialization routines
-│   │   └── answer.sql           # Analytical queries on gold layer
 │   │
 │   ├── gold/
 │   │   └── ddl_gold.sql         # Fact & Dimension star schema definitions
+│   │
+│   ├── init_db.sql          # Utility / initialization routines
+│   ├── answer.sql           # Analytical queries on gold layer
 │
 ├── tests/
 │   ├── quality_checks_silver.sql # Data quality checks after cleansing
